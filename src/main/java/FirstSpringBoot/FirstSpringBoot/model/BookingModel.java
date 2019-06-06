@@ -2,7 +2,11 @@ package FirstSpringBoot.FirstSpringBoot.model;
 
 public class BookingModel {
 
-//    id int, name string, room string, start string ,end string
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    //    id int, name string, room string, start string ,end string
     private int id;
     private String name;
     private String room;

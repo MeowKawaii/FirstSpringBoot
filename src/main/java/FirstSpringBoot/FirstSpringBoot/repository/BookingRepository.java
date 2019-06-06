@@ -1,29 +1,55 @@
 package FirstSpringBoot.FirstSpringBoot.repository;
 
 import FirstSpringBoot.FirstSpringBoot.model.BookingModel;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-import java.util.HashMap;
 
-public class BookingRepository {
-    private static HashMap <Integer, BookingModel> table = new HashMap<Integer, BookingModel>();
+@Repository
+public class BookingRepository{
+//    private static HashMap <Integer, BookingModel> table = new HashMap<Integer, BookingModel>();
 
-    public static boolean create(BookingModel booking){
-        table.put(booking.getId(),booking);
+    private SqlSession session;
 
-        return true;
+    @Qualifier("bookingSqlSessionTemplate")
+    @Autowired
+    public void setSession(SqlSession session){
+        this.session = session;
     }
 
-    public static Collection<BookingModel> getAll(){
-        return table.values();
+    private BookingMapper getMapper(){
+        return session.getMapper(BookingMapper.class);
     }
 
-    public static BookingModel get(int id){
-        return table.get(id);
+    public BookingModel showByID(int id){
+
+        return getMapper().showByID(id);
     }
 
-    public static BookingModel delete(int id){
-        return table.remove(id);
+    public int create(BookingModel booking){
+        return getMapper().createBooking(booking);
+
     }
+
+    public int getMaxID(){
+        return getMapper().showMaxID();
+    }
+
+    public Collection<BookingModel> getAll(){
+        return getMapper().showAll();
+    }
+
+    public String delete(int id){
+        if(1 == getMapper().deleteByID(id)){
+            return "{\"id\":\""+id+"\",\"status\":\"success\"}";
+        }
+        else
+            return "cannot delete";
+    }
+
+
 
 }
