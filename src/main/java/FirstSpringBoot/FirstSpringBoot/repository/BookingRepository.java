@@ -10,7 +10,6 @@ import java.util.Collection;
 
 @Repository
 public class BookingRepository{
-//    private static HashMap <Integer, BookingModel> table = new HashMap<Integer, BookingModel>();
 
     private SqlSession session;
 
@@ -42,12 +41,8 @@ public class BookingRepository{
         return getMapper().showAll();
     }
 
-    public String delete(int id){
-        if(1 == getMapper().deleteByID(id)){
-            return "{\"id\":\""+id+"\",\"status\":\"success\"}";
-        }
-        else
-            return "cannot delete";
+    public int delete(int id){
+        return getMapper().deleteByID(id);
     }
 
 

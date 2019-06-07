@@ -7,15 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-
 @RestController
 public class CreateBookingController {
 
     @Autowired
     BookingRepository bookingRepository;
-
-    ArrayList<BookingModel> table = new ArrayList<BookingModel>();
 
     @PostMapping("/bookings/")
     public BookingModel addBooking(@RequestBody BookingModel booking){

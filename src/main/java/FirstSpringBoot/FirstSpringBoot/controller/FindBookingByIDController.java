@@ -1,7 +1,6 @@
 package FirstSpringBoot.FirstSpringBoot.controller;
 
 import FirstSpringBoot.FirstSpringBoot.model.BookingModel;
-import FirstSpringBoot.FirstSpringBoot.repository.BookingMapper;
 import FirstSpringBoot.FirstSpringBoot.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +17,4 @@ public class FindBookingByIDController {
     public BookingModel getByID(@PathVariable int id){
         return bookingRepository.showByID(id);
     }
-
-
 }

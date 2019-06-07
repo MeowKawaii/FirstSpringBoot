@@ -22,6 +22,4 @@ public class ShowAllBookingController {
     public Collection<BookingModel> bookingList(){
         return bookingRepository.getAll();
     }
-
-
 }
